@@ -1,15 +1,29 @@
 package com.quanminjieshui.watechain.ui.activity;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.quanminjieshui.watechain.R;
 import com.quanminjieshui.watechain.base.BaseActivity;
 import com.quanminjieshui.watechain.contract.model.LoginModel;
 import com.quanminjieshui.watechain.contract.presenter.LoginPresenter;
 import com.quanminjieshui.watechain.contract.view.LoginViewImpl;
+import com.quanminjieshui.watechain.utils.StatusBarUtil;
 
+import java.util.Map;
+
+import butterknife.BindDrawable;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -17,11 +31,31 @@ import butterknife.OnClick;
  * Created by WanghongHe on 2018/12/3 11:53.
  */
 
-public class LoginActivity extends BaseActivity implements LoginViewImpl{
+public class LoginActivity extends BaseActivity implements LoginViewImpl {
+    private LoginPresenter loginPresenter;
 
+    @BindView(R.id.title_bar)
+    View title_bar;
+    @BindView(R.id.img_title_left)
+    ImageView img_title_left;
+    @BindView(R.id.tv_title_center)
+    TextView tv_title_center;
+    @BindView(R.id.edt_mobile)
+    EditText edt_mobile;
+    @BindView(R.id.edt_pwd)
+    EditText edt_pwd;
     @BindView(R.id.btn_login)
     Button btn_login;
-    private LoginPresenter loginPresenter;
+
+    @BindDrawable(R.drawable.edittext_border_bg_shape)
+    Drawable edt_border;
+    @BindDrawable(R.drawable.edittext_border_illegal_bg_shape)
+    Drawable edt_border_illegal;
+
+    @BindString(R.string.key_edt_name_mobile)
+    String keyMobile;
+    @BindString(R.string.key_edt_name_pwd)
+    String keyPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +63,27 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl{
 
         loginPresenter = new LoginPresenter(new LoginModel());
         loginPresenter.attachView(this);
-
-
+        StatusBarUtil.setImmersionStatus(this, title_bar);
+        initView();
     }
 
-    @OnClick({R.id.btn_login})
-    public void OnClick(View view){
+    @OnClick({R.id.btn_login, R.id.tv_register, R.id.tv_forget, R.id.img_title_left})
+    public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                loginPresenter.login(this,"Nigggg","aaaaaaaa");
+                String mobile = edt_mobile.getText().toString();
+                String pwd = edt_pwd.getText().toString();
+                loginPresenter.verify(mobile, pwd);
+                loginPresenter.login(this, mobile, pwd);
+                break;
+            case R.id.tv_register:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                break;
+            case R.id.tv_forget:
+
+                break;
+            case R.id.img_title_left:
+                goBack();
                 break;
             default:
                 break;
@@ -47,9 +93,14 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl{
     /**
      * 初始化页面Ui
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initContentView() {
         setContentView(R.layout.activity_login);
+    }
+
+    private void initView() {
+        tv_title_center.setText("用户登录");
     }
 
     /**
@@ -60,6 +111,30 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl{
     @Override
     public void onReNetRefreshData(int viewId) {
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onEdtContentsLegal() {
+        edt_mobile.setBackground(edt_border);
+        edt_pwd.setBackground(edt_border);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onEdtContentsIllegal(Map<String, Boolean> verifyResult) {
+        if (verifyResult.get(keyMobile) != null && !verifyResult.get(keyMobile)) {
+            edt_mobile.setBackground(edt_border_illegal);
+            edt_mobile.setText("");
+        } else {
+            edt_mobile.setBackground(edt_border);
+        }
+        if (verifyResult.get(keyPwd) != null && !verifyResult.get(keyPwd)) {
+            edt_pwd.setBackground(edt_border_illegal);
+            edt_pwd.setText("");
+        } else {
+            edt_pwd.setBackground(edt_border);
+        }
     }
 
     @Override
@@ -75,10 +150,9 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(loginPresenter!=null){
+        if (loginPresenter != null) {
             loginPresenter.detachView();
         }
     }
-
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_padding">48px</dimen>
+    <dimen name="activity_horizontal_margin">48px</dimen>
+
+    <dimen name="title_bar_height">132px</dimen>
+    <dimen name="nav_bac_height">146px</dimen>
+    <dimen name="edittext_height">132px</dimen>
+    <dimen name="edittext_margin_top">25px</dimen>
+    <dimen name="edittext_padding_left">25px</dimen>
+    <dimen name="view_space">25px</dimen>
+
+
+
+
+
+    <dimen name="title_center_text_size">60px</dimen>
+    <dimen name="title_left_text_size">55px</dimen>
+    <dimen name="btn_text_size">60px</dimen>
+    <dimen name="nomal_text_size">45px</dimen>
+
+</resources>

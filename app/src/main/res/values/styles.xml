@@ -52,4 +52,20 @@
         <!--<item name="android:windowBackground">@drawable/layer_list</item>-->
     </style>
 
+    <style name="MarginTopBottom">
+        <item name="android:layout_marginTop">@dimen/edittext_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/edittext_margin_top</item>
+    </style>
+
+    <style name="EdtTopBottomLeft">
+        <item name="android:layout_marginTop">@dimen/edittext_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/edittext_margin_top</item>
+        <item name="android:paddingLeft">@dimen/edittext_padding_left</item>
+    </style>
+
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/primary_blue</item>
+        <item name="colorControlActivated">@color/primary_blue</item>
+    </style>
+
 </resources>

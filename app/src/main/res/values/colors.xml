@@ -15,4 +15,9 @@
     <color name="actionsheet_gray">#8F8F8F</color>
     <color name="color_grey_normal">#FF666666</color>
     <color name="color_grey_press">#999999</color>
+
+
+    <color name="primary_blue">#FF2F97FE</color>
+    <color name="primary_Dark">#FF2F6DFE</color>
+    <color name="edittext_border_gray">#FFE1E3EE</color>
 </resources>

@@ -195,6 +195,11 @@ public abstract class BaseActivity  extends BasePermissionActivity implements Li
         hideSoftKeyboard(this);
     }
 
+    public void goBack() {
+        finish();
+        hideSoftKeyboard(this);
+    }
+
     public void setWebView(WebView webView) {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);

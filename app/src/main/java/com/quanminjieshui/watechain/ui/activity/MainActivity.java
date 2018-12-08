@@ -2,11 +2,13 @@ package com.quanminjieshui.watechain.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.quanminjieshui.watechain.R;
 import com.quanminjieshui.watechain.base.BaseActivity;
+import com.quanminjieshui.watechain.utils.AccountValidatorUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +23,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
