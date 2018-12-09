@@ -23,6 +23,11 @@ import java.util.Map;
  */
 
 public class LoginModel {
+    /**
+     * 提交信息是否合法，View中根据value值标红并清除控件内容
+     * value    true->内容合法，控件内容不变
+     *          false->内容不合法，edittext边框变红，内容清空
+     */
     private Map<String, Boolean> verifyResult = new HashMap<String, Boolean>();
 
     /**
