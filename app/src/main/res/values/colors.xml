@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="text_color">#4B62AA</color>
+    <color name="color_icon_text_unchoose"> #BDBDBD</color>
     <color name="white">#FFFFFF</color>
     <color name="color_0595e6">#0595e6</color>
     <color name="trans">#00000000</color>

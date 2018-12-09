@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.quanminjieshui.watechain"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -51,4 +51,5 @@ dependencies {
     implementation 'com.lzy.widget:imagepicker:0.6.1'//图片裁剪选择工具
     implementation 'top.zibin:Luban:1.1.1'//压缩工具
     implementation 'de.greenrobot:eventbus:2.4.0'//进程通信EventBus
+    implementation 'cn.bingoogolapple:bga-banner:2.2.5@aar'//轮播图
 }
