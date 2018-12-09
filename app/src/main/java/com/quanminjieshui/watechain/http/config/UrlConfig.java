@@ -13,10 +13,11 @@ public class UrlConfig {
     public final static String getMessageList = "/api/app/user/message/";
 
 
-
     //获取短信验证码接口
-    public final static String GET_SMS="";
+    public final static String GET_SMS = "";
 
     //注册接口
-    public final static String REGISTER="";
+    public final static String REGISTER = "";
+    //找回/重置密码借口
+    public static final String RESET = "";
 }

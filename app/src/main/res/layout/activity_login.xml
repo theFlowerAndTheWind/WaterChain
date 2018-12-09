@@ -54,7 +54,7 @@
             android:textSize="@dimen/nomal_text_size" />
 
         <TextView
-            android:id="@+id/tv_forget"
+            android:id="@+id/tv_reset"
             style="@style/MarginTopBottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,8 +1,8 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
- * FileName: RegisterPresenter
+ * FileName: ResetPwdPresenter
  * Author: sxt
- * Date: 2018/12/8 2:51 PM
+ * Date: 2018/12/9 2:17 AM
  * Description:
  * History:
  * <author> <time> <version> <desc>
@@ -12,41 +12,40 @@ package com.quanminjieshui.watechain.contract.presenter;
 
 import com.quanminjieshui.watechain.base.BaseActivity;
 import com.quanminjieshui.watechain.contract.BasePresenter;
-import com.quanminjieshui.watechain.contract.model.LoginModel;
-import com.quanminjieshui.watechain.contract.model.RegisterModel;
-import com.quanminjieshui.watechain.contract.view.RegisterViewImpl;
+import com.quanminjieshui.watechain.contract.model.ResetPwdModel;
+import com.quanminjieshui.watechain.contract.view.ResetPwdViewImpl;
 
 import java.util.Map;
 
 /**
- * @ClassName: RegisterPresenter
+ * @ClassName: ResetPwdPresenter
  * @Description: java类作用描述
  * @Author: sxt
- * @Date: 2018/12/8 2:51 PM
+ * @Date: 2018/12/9 2:17 AM
  */
-public class RegisterPresenter extends BasePresenter<RegisterViewImpl> {
+public class ResetPwdPresenter extends BasePresenter<ResetPwdViewImpl>  {
 
-    private RegisterModel registerModel;
+    private ResetPwdModel model;
 
-    public RegisterPresenter(RegisterModel registerModel) {
-        this.registerModel = registerModel;
+    public ResetPwdPresenter(ResetPwdModel model) {
+        this.model = model;
     }
 
     public void verify(String mobile) {
-        registerModel.verify(mobile);
+        model.verify(mobile);
     }
 
-    public void verify(final String mobile, final String pwd, final String confirm, final String sms, final String invitation, final boolean agreement) {
-        registerModel.verify(mobile, pwd, confirm, sms, invitation, agreement);
+    public void verify(final String mobile, final String pwd, final String confirm, final String sms) {
+        model.verify(mobile, pwd, confirm, sms);
     }
 
     public void getSms(BaseActivity activity, String mobile) {
-        if (registerModel == null) {
-            registerModel = new RegisterModel();
+        if (model == null) {
+            model = new ResetPwdModel();
         }
 
 
-        registerModel.getSms(activity, mobile, new RegisterModel.RegisterCallback() {
+        model.getSms(activity, mobile, new ResetPwdModel.ResetPwdCallback() {
 
 
             @Override
@@ -78,20 +77,21 @@ public class RegisterPresenter extends BasePresenter<RegisterViewImpl> {
             }
 
             @Override
-            public void onRegisterSuccess() {
+            public void onResetSuccess() {
             }
 
             @Override
-            public void onRegisterFaild(String msg) {
+            public void onResetFaild(String msg) {
             }
+
         });
     }
 
-    public void register(BaseActivity activity, final String mobile, final String pwd, final String confirm, final String sms, final String invitation, final boolean agreement) {
-        if (registerModel == null) {
-            registerModel = new RegisterModel();
+    public void reset(BaseActivity activity, final String mobile, final String pwd, final String confirm, final String sms) {
+        if (model == null) {
+            model = new ResetPwdModel();
         }
-        registerModel.register(activity, mobile, pwd, confirm, sms, invitation, agreement, new RegisterModel.RegisterCallback() {
+        model.reset(activity, mobile, pwd, confirm, sms, new ResetPwdModel.ResetPwdCallback() {
             @Override
             public void onEdtContentsLegal() {
                 if (mView != null) {
@@ -108,28 +108,25 @@ public class RegisterPresenter extends BasePresenter<RegisterViewImpl> {
 
             @Override
             public void onGetSmsSuccess() {
-
             }
 
             @Override
             public void onGetSmsFailed(String msg) {
-
             }
 
             @Override
-            public void onRegisterSuccess() {
+            public void onResetSuccess() {
                 if (mView != null) {
-                    mView.onRegisterSuccess();
+                    mView.onResetSuccess();
                 }
             }
 
             @Override
-            public void onRegisterFaild(String msg) {
+            public void onResetFaild(String msg) {
                 if (mView != null) {
-                    mView.onRegisterFaild(msg);
+                    mView.onResetFaild(msg);
                 }
             }
         });
     }
-
 }

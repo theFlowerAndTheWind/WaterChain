@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl {
         initView();
     }
 
-    @OnClick({R.id.btn_login, R.id.tv_register, R.id.tv_forget, R.id.img_title_left})
+    @OnClick({R.id.btn_login, R.id.tv_register, R.id.tv_reset, R.id.img_title_left})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
@@ -79,8 +79,8 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl {
             case R.id.tv_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
-            case R.id.tv_forget:
-
+            case R.id.tv_reset:
+                startActivity(new Intent(LoginActivity.this, ResetPwdActivity.class));
                 break;
             case R.id.img_title_left:
                 goBack();

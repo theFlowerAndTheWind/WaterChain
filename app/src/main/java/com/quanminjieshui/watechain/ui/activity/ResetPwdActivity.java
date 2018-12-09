@@ -1,8 +1,8 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
- * FileName: RegisterActivity
+ * FileName: ResetPwdActivity
  * Author: sxt
- * Date: 2018/12/8 1:30 PM
+ * Date: 2018/12/9 2:09 AM
  * Description:
  * History:
  * <author> <time> <version> <desc>
@@ -18,18 +18,15 @@ import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.quanminjieshui.watechain.R;
 import com.quanminjieshui.watechain.base.BaseActivity;
-import com.quanminjieshui.watechain.contract.model.RegisterModel;
-import com.quanminjieshui.watechain.contract.presenter.RegisterPresenter;
-import com.quanminjieshui.watechain.contract.view.LoginViewImpl;
-import com.quanminjieshui.watechain.contract.view.RegisterViewImpl;
+import com.quanminjieshui.watechain.contract.model.ResetPwdModel;
+import com.quanminjieshui.watechain.contract.presenter.ResetPwdPresenter;
+import com.quanminjieshui.watechain.contract.view.ResetPwdViewImpl;
 import com.quanminjieshui.watechain.utils.StatusBarUtil;
 
 import java.util.Map;
@@ -40,12 +37,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * @ClassName: RegisterActivity
+ * @ClassName: ResetPwdActivity
  * @Description: java类作用描述
  * @Author: sxt
- * @Date: 2018/12/8 1:30 PM
+ * @Date: 2018/12/9 2:09 AM
  */
-public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
+public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
 
     @BindView(R.id.title_bar)
     View title_bar;
@@ -63,16 +60,9 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     EditText edt_pwd;
     @BindView(R.id.edt_confirm)
     EditText edt_confirm;
-    @BindView(R.id.edt_invitation)
-    EditText edt_invitation;
-    @BindView(R.id.cb_agreement)
-    CheckBox cb_agreement;
-    @BindView(R.id.tv_agreement)
-    TextView tv_agreement;
-    @BindView(R.id.btn_register)
-    Button btn_register;
-    @BindView(R.id.tv_existing)
-    TextView tv_existing;
+    @BindView(R.id.btn_reset)
+    Button btn_reset;
+
 
     @BindDrawable(R.drawable.edittext_border_bg_shape)
     Drawable edt_border;
@@ -86,17 +76,13 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     String keyPwd;
     @BindString(R.string.key_edt_name_sms)
     String keySms;
-    @BindString(R.string.key_checkbox_agreement)
-    String keyAgreement;
-
 
     private String mobile;
     private String sms;
     private String pwd;
     private String confirm;
-    private String invitation;
-    private boolean isChecked = true;
-    private RegisterPresenter presenter;
+
+    private ResetPwdPresenter presenter;
 
     private class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -121,7 +107,7 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new RegisterPresenter(new RegisterModel());
+        presenter = new ResetPwdPresenter(new ResetPwdModel());
         presenter.attachView(this);
 
         StatusBarUtil.setImmersionStatus(this, title_bar);
@@ -129,18 +115,12 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     }
 
     private void initView() {
-        tv_title_center.setText("注册");
-        cb_agreement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isChecked = isChecked;
-            }
-        });
+        tv_title_center.setText("忘记密码");
     }
 
     @Override
     public void initContentView() {
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_reset_pwd);
     }
 
     @Override
@@ -148,7 +128,7 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
 
     }
 
-    @OnClick({R.id.tv_get_sms, R.id.tv_agreement, R.id.btn_register, R.id.tv_existing})
+    @OnClick({R.id.tv_get_sms, R.id.btn_reset})
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
@@ -157,22 +137,13 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
                 presenter.verify(mobile);
                 presenter.getSms(this, mobile);
                 break;
-//            case R.id.cb_agreement:
-//                break;
-            case R.id.tv_agreement:
-                //todo startAct 2 agreement webView
-                break;
-            case R.id.btn_register:
+            case R.id.btn_reset:
                 mobile = edt_mobile.getText().toString();
                 sms = edt_sms.getText().toString();
                 pwd = edt_pwd.getText().toString();
                 confirm = edt_confirm.getText().toString();
-                invitation = edt_invitation.getText().toString();
-                presenter.verify(mobile, pwd, confirm, sms, invitation, isChecked);
-                presenter.register(this, mobile, pwd, confirm, sms, invitation, isChecked);
-                break;
-            case R.id.tv_existing:
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                presenter.verify(mobile, pwd, confirm, sms);
+                presenter.reset(this, mobile, pwd, confirm, sms);
                 break;
             case R.id.img_title_left:
                 goBack();
@@ -190,7 +161,6 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
         edt_sms.setBackground(edt_border);
         edt_pwd.setBackground(edt_border);
         edt_confirm.setBackground(edt_border);
-        edt_invitation.setBackground(edt_border);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -217,13 +187,12 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
             edt_pwd.setBackground(edt_border);
             edt_confirm.setBackground(edt_border);
         }
-        edt_invitation.setBackground(edt_border);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onGetSmsSuccess() {
-        new TimeCount(61000, 1000).start();
+        new ResetPwdActivity.TimeCount(61000, 1000).start();
         tv_get_sms.setEnabled(false);
         tv_get_sms.setBackground(getDrawable(R.drawable.textview_blue_bg_shape));
         tv_get_sms.setTextColor(getResources().getColor(R.color.white));
@@ -235,12 +204,12 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     }
 
     @Override
-    public void onRegisterSuccess() {
+    public void onResetSuccess() {
 
     }
 
     @Override
-    public void onRegisterFaild(String msg) {
+    public void onResetFaild(String msg) {
 
     }
 

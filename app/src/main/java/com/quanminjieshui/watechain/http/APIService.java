@@ -40,4 +40,9 @@ public interface APIService {
     @POST(UrlConfig.REGISTER)
     @FormUrlEncoded
     Observable<BaseEntity<RegisterResponseBean>> register(@FieldMap Map<String,Object> map);
+
+    @POST(UrlConfig.RESET)
+    @FormUrlEncoded
+    Observable<BaseEntity<RegisterResponseBean>> reset(@FieldMap Map<String,Object> map);
+
 }

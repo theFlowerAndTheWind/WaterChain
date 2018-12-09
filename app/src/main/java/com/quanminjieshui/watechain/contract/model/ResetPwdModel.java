@@ -1,8 +1,8 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
- * FileName: RegisterModel
+ * FileName: ResetPwdModel
  * Author: sxt
- * Date: 2018/12/8 11:51 AM
+ * Date: 2018/12/9 2:15 AM
  * Description:
  * History:
  * <author> <time> <version> <desc>
@@ -17,8 +17,6 @@ import com.quanminjieshui.watechain.R;
 import com.quanminjieshui.watechain.WaterChainApplication;
 import com.quanminjieshui.watechain.base.BaseActivity;
 import com.quanminjieshui.watechain.beans.RegisterResponseBean;
-import com.quanminjieshui.watechain.beans.SmsResponseBean;
-import com.quanminjieshui.watechain.beans.UserBean;
 import com.quanminjieshui.watechain.http.BaseObserver;
 import com.quanminjieshui.watechain.http.RetrofitFactory;
 import com.quanminjieshui.watechain.http.bean.BaseEntity;
@@ -32,12 +30,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @ClassName: RegisterModel
- * @Description:
+ * @ClassName: ResetPwdModel
+ * @Description: java类作用描述
  * @Author: sxt
- * @Date: 2018/12/8 11:51 AM
+ * @Date: 2018/12/9 2:15 AM
  */
-public class RegisterModel {
+public class ResetPwdModel {
     private Map<String, Boolean> verifyResult = new HashMap<String, Boolean>();
     private WaterChainApplication context = WaterChainApplication.getInstance();
 
@@ -52,7 +50,7 @@ public class RegisterModel {
         return verifyResult;
     }
 
-    public void getSms(final BaseActivity activity, final String mobile, final RegisterCallback callback) {
+    public void getSms(final BaseActivity activity, final String mobile, final ResetPwdCallback callback) {
         int Illegal = 0;
         for (Map.Entry<String, Boolean> entry : verifyResult.entrySet()) {
             final Boolean value = entry.getValue();
@@ -101,7 +99,7 @@ public class RegisterModel {
 //                });
     }
 
-    public Map<String, Boolean> verify(final String mobile, final String pwd,final String confirm, final String sms, final String invitation, final boolean agreement) {
+    public Map<String, Boolean> verify(final String mobile, final String pwd,final String confirm, final String sms) {
         verifyResult.clear();
         if (!TextUtils.isEmpty(mobile) && AccountValidatorUtil.isMobile(mobile)) {
             verifyResult.put(context.getString(R.string.key_edt_name_mobile), true);
@@ -118,15 +116,11 @@ public class RegisterModel {
         }else{
             verifyResult.put(context.getString(R.string.key_edt_name_pwd),false);
         }
-        if(agreement){
-            verifyResult.put(context.getString(R.string.key_checkbox_agreement),true);
-        }else{
-            verifyResult.put(context.getString(R.string.key_checkbox_agreement),false);
-        }
+
         return verifyResult;
     }
 
-    public void register(final BaseActivity activity, final String mobile, final String pwd,final String confirm, final String sms, final String invitation, final boolean agreement, final RegisterCallback callback) {
+    public void reset(final BaseActivity activity, final String mobile, final String pwd,final String confirm, final String sms, final ResetPwdCallback callback) {
         int Illegal = 0;
         for (Map.Entry<String, Boolean> entry : verifyResult.entrySet()) {
             final Boolean value = entry.getValue();
@@ -140,23 +134,22 @@ public class RegisterModel {
             callback.onEdtContentsIllegal(verifyResult);
             return;
         }
-        Log.e("TAG", "开始注册请求");
+        Log.e("TAG", "开始重置请求");
 
 //        Map<String, Object> form = new HashMap<>();
 //        form.put(context.getString(R.string.field_mobile), mobile);
 //        form.put(context.getString(R.string.field_pwd), pwd);
 //        form.put(context.getString(R.string.field_sms), sms);
-//        form.put(context.getString(R.string.field_invitation), invitation);
-//        form.put("agreement", agreement);
 //        RetrofitFactory.getInstance().createService()
-//                .register(form)
+//                //.register(form)
+//                .reset(form)
 //                .compose(activity.<BaseEntity<RegisterResponseBean>>bindToLifecycle())//绑定activity生命周期，防止内存溢出
 //                .compose(ObservableTransformerUtils.<BaseEntity<RegisterResponseBean>>io())//选择线程
 //                .subscribe(new BaseObserver<RegisterResponseBean>(activity) {
 //                    @Override
 //                    protected void onSuccess(RegisterResponseBean bean) throws Exception {
 //                        //todo save sth. or do sth.
-//                        callback.onRegisterSuccess();
+//                        callback.onResetSuccess();
 //                    }
 //
 //                    @Override
@@ -164,19 +157,19 @@ public class RegisterModel {
 //                        if (e != null && e.getMessage() != null) {
 //                            if (isNetWorkError) {
 //                                LogUtils.e(e.getMessage());
-//                                callback.onRegisterFaild(HttpConfig.ERROR_MSG);
+//                                callback.onResetFaild(HttpConfig.ERROR_MSG);
 //                            } else {
-//                                callback.onRegisterFaild(e.getMessage());
+//                                callback.onResetFaild(e.getMessage());
 //                            }
 //                        } else {
-//                            callback.onRegisterFaild("");
+//                            callback.onResetFaild("");
 //                        }
 //                    }
 //
 //                    @Override
 //                    protected void onCodeError(String code, String msg) throws Exception {
 //                        super.onCodeError(code, msg);
-//                        callback.onRegisterFaild(msg);
+//                        callback.onResetFaild(msg);
 //                    }
 //                });
 
@@ -186,7 +179,7 @@ public class RegisterModel {
         return Collections.unmodifiableMap(verifyResult);
     }
 
-    public interface RegisterCallback {
+    public interface ResetPwdCallback {
 
         void onEdtContentsLegal();
 
@@ -196,9 +189,9 @@ public class RegisterModel {
 
         void onGetSmsFailed(String msg);
 
-        void onRegisterSuccess();
+        void onResetSuccess();
 
-        void onRegisterFaild(String msg);
+        void onResetFaild(String msg);
     }
 
 }
