@@ -4,7 +4,7 @@ import com.quanminjieshui.waterchain.contract.IBaseViewImpl;
 
 import java.util.Map;
 
-public interface ResetPwdViewImpl extends IBaseViewImpl {
+public interface FindPassViewImpl extends IBaseViewImpl {
     void onEdtContentsLegal();
 
     void onEdtContentsIllegal(Map<String, Boolean> verify);
@@ -13,8 +13,8 @@ public interface ResetPwdViewImpl extends IBaseViewImpl {
 
     void onGetSmsFailed(String msg);
 
-    void onResetSuccess();
+    void onFindPassSuccess();
 
-    void onResetFaild(String msg);
+    void onFindPassFaild(String msg);
 }
 

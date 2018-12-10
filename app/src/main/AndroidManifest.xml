@@ -20,7 +20,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <meta-data
             android:name="design_width"
@@ -41,9 +42,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.quanminjieshui.waterchain.ui.activity.RegisterActivity"/>
-        <activity android:name="com.quanminjieshui.waterchain.ui.activity.ResetPwdActivity"/>
-        <activity android:name="com.quanminjieshui.waterchain.ui.activity.RegisterSuccessActivity"/>
+        <activity android:name="com.quanminjieshui.waterchain.ui.activity.RegisterActivity"></activity>>
+        <activity android:name="com.quanminjieshui.waterchain.ui.activity.FindPassActivity"></activity>
+        <activity android:name="com.quanminjieshui.waterchain.ui.activity.RegisterSuccessActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".ui.activity.AuthActivity"></activity>
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:screenOrientation="portrait"

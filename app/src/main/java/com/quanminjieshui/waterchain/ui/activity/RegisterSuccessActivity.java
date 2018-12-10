@@ -10,6 +10,7 @@
  */
 package com.quanminjieshui.waterchain.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,7 +64,7 @@ public class RegisterSuccessActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_register_success:
-
+                startActivity(new Intent(RegisterSuccessActivity.this,MainActivity.class));
                 break;
             case R.id.img_title_left:
                 goBack(view);

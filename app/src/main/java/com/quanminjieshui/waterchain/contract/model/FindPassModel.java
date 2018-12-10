@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
- * FileName: ResetPwdModel
+ * FileName: FindPassModel
  * Author: sxt
  * Date: 2018/12/9 2:15 AM
  * Description:
@@ -23,12 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @ClassName: ResetPwdModel
+ * @ClassName: FindPassModel
  * @Description: java类作用描述
  * @Author: sxt
  * @Date: 2018/12/9 2:15 AM
  */
-public class ResetPwdModel {
+public class FindPassModel {
     private Map<String, Boolean> verifyResult = new HashMap<String, Boolean>();
     private WaterChainApplication context = WaterChainApplication.getInstance();
 
@@ -43,7 +43,7 @@ public class ResetPwdModel {
         return verifyResult;
     }
 
-    public void getSms(final BaseActivity activity, final String mobile, final ResetPwdCallback callback) {
+    public void getSms(final BaseActivity activity, final String mobile, final FindPassCallback callback) {
         int Illegal = 0;
         for (Map.Entry<String, Boolean> entry : verifyResult.entrySet()) {
             final Boolean value = entry.getValue();
@@ -113,7 +113,7 @@ public class ResetPwdModel {
         return verifyResult;
     }
 
-    public void reset(final BaseActivity activity, final String mobile, final String pwd,final String confirm, final String sms, final ResetPwdCallback callback) {
+    public void findPass(final BaseActivity activity, final String mobile, final String pwd, final String confirm, final String sms, final FindPassCallback callback) {
         int Illegal = 0;
         for (Map.Entry<String, Boolean> entry : verifyResult.entrySet()) {
             final Boolean value = entry.getValue();
@@ -135,14 +135,14 @@ public class ResetPwdModel {
 //        form.put(context.getString(R.string.field_sms), sms);
 //        RetrofitFactory.getInstance().createService()
 //                //.register(form)
-//                .reset(form)
+//                .findPass(form)
 //                .compose(activity.<BaseEntity<RegisterResponseBean>>bindToLifecycle())//绑定activity生命周期，防止内存溢出
 //                .compose(ObservableTransformerUtils.<BaseEntity<RegisterResponseBean>>io())//选择线程
 //                .subscribe(new BaseObserver<RegisterResponseBean>(activity) {
 //                    @Override
 //                    protected void onSuccess(RegisterResponseBean bean) throws Exception {
 //                        //todo save sth. or do sth.
-//                        callback.onResetSuccess();
+//                        callback.onFindPassSuccess();
 //                    }
 //
 //                    @Override
@@ -150,19 +150,19 @@ public class ResetPwdModel {
 //                        if (e != null && e.getMessage() != null) {
 //                            if (isNetWorkError) {
 //                                LogUtils.e(e.getMessage());
-//                                callback.onResetFaild(HttpConfig.ERROR_MSG);
+//                                callback.onFindPassFaild(HttpConfig.ERROR_MSG);
 //                            } else {
-//                                callback.onResetFaild(e.getMessage());
+//                                callback.onFindPassFaild(e.getMessage());
 //                            }
 //                        } else {
-//                            callback.onResetFaild("");
+//                            callback.onFindPassFaild("");
 //                        }
 //                    }
 //
 //                    @Override
 //                    protected void onCodeError(String code, String msg) throws Exception {
 //                        super.onCodeError(code, msg);
-//                        callback.onResetFaild(msg);
+//                        callback.onFindPassFaild(msg);
 //                    }
 //                });
 
@@ -172,7 +172,7 @@ public class ResetPwdModel {
         return Collections.unmodifiableMap(verifyResult);
     }
 
-    public interface ResetPwdCallback {
+    public interface FindPassCallback {
 
         void onEdtContentsLegal();
 
@@ -182,9 +182,9 @@ public class ResetPwdModel {
 
         void onGetSmsFailed(String msg);
 
-        void onResetSuccess();
+        void onFindPassSuccess();
 
-        void onResetFaild(String msg);
+        void onFindPassFaild(String msg);
     }
 
 }

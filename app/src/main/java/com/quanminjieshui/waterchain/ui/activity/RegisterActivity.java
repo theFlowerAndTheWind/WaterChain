@@ -73,9 +73,9 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     @BindView(R.id.tv_existing)
     TextView tv_existing;
 
-    @BindDrawable(R.drawable.edittext_border_bg_shape)
+    @BindDrawable(R.drawable.gray_border_bg_shape)
     Drawable edt_border;
-    @BindDrawable(R.drawable.edittext_border_illegal_bg_shape)
+    @BindDrawable(R.drawable.red_border_illegal_bg_shape)
     Drawable edt_border_illegal;
 
 
@@ -107,7 +107,7 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
         public void onFinish() {//计时完毕时触发
             tv_get_sms.setText("发送验证码");
             tv_get_sms.setEnabled(true);
-            tv_get_sms.setBackground(getDrawable(R.drawable.textview_border_bg_shape));
+            tv_get_sms.setBackground(getDrawable(R.drawable.blue_border_bg_shape));
             tv_get_sms.setTextColor(getResources().getColor(R.color.primary_blue));
         }
 
@@ -169,6 +169,7 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
                 invitation = edt_invitation.getText().toString();
                 presenter.verify(mobile, pwd, confirm, sms, invitation, isChecked);
                 presenter.register(this, mobile, pwd, confirm, sms, invitation, isChecked);
+
                 break;
             case R.id.tv_existing:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
@@ -224,7 +225,7 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
     public void onGetSmsSuccess() {
         new TimeCount(61000, 1000).start();
         tv_get_sms.setEnabled(false);
-        tv_get_sms.setBackground(getDrawable(R.drawable.textview_blue_bg_shape));
+        tv_get_sms.setBackground(getDrawable(R.drawable.blue_bg_shape));
         tv_get_sms.setTextColor(getResources().getColor(R.color.white));
     }
 
@@ -235,7 +236,7 @@ public class RegisterActivity extends BaseActivity implements RegisterViewImpl {
 
     @Override
     public void onRegisterSuccess() {
-
+        startActivity(new Intent(RegisterActivity.this,AuthActivity.class));
     }
 
     @Override

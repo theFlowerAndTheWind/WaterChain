@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
- * FileName: ResetPwdActivity
+ * FileName: FindPassActivity
  * Author: sxt
  * Date: 2018/12/9 2:09 AM
  * Description:
@@ -23,9 +23,9 @@ import android.widget.TextView;
 
 import com.quanminjieshui.waterchain.R;
 import com.quanminjieshui.waterchain.base.BaseActivity;
-import com.quanminjieshui.waterchain.contract.model.ResetPwdModel;
-import com.quanminjieshui.waterchain.contract.presenter.ResetPwdPresenter;
-import com.quanminjieshui.waterchain.contract.view.ResetPwdViewImpl;
+import com.quanminjieshui.waterchain.contract.model.FindPassModel;
+import com.quanminjieshui.waterchain.contract.presenter.FindPassPresenter;
+import com.quanminjieshui.waterchain.contract.view.FindPassViewImpl;
 import com.quanminjieshui.waterchain.utils.StatusBarUtil;
 
 import java.util.Map;
@@ -36,12 +36,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * @ClassName: ResetPwdActivity
+ * @ClassName: FindPassActivity
  * @Description: java类作用描述
  * @Author: sxt
  * @Date: 2018/12/9 2:09 AM
  */
-public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
+public class FindPassActivity extends BaseActivity implements FindPassViewImpl {
 
     @BindView(R.id.title_bar)
     View title_bar;
@@ -59,13 +59,13 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
     EditText edt_pwd;
     @BindView(R.id.edt_confirm)
     EditText edt_confirm;
-    @BindView(R.id.btn_reset)
-    Button btn_reset;
+    @BindView(R.id.btn_find)
+    Button btn_find;
 
 
-    @BindDrawable(R.drawable.edittext_border_bg_shape)
+    @BindDrawable(R.drawable.gray_border_bg_shape)
     Drawable edt_border;
-    @BindDrawable(R.drawable.edittext_border_illegal_bg_shape)
+    @BindDrawable(R.drawable.red_border_illegal_bg_shape)
     Drawable edt_border_illegal;
 
 
@@ -81,7 +81,7 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
     private String pwd;
     private String confirm;
 
-    private ResetPwdPresenter presenter;
+    private FindPassPresenter presenter;
 
     private class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -93,7 +93,7 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
         public void onFinish() {//计时完毕时触发
             tv_get_sms.setText("发送验证码");
             tv_get_sms.setEnabled(true);
-            tv_get_sms.setBackground(getDrawable(R.drawable.textview_border_bg_shape));
+            tv_get_sms.setBackground(getDrawable(R.drawable.blue_border_bg_shape));
             tv_get_sms.setTextColor(getResources().getColor(R.color.primary_blue));
         }
 
@@ -106,7 +106,7 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ResetPwdPresenter(new ResetPwdModel());
+        presenter = new FindPassPresenter(new FindPassModel());
         presenter.attachView(this);
 
         StatusBarUtil.setImmersionStatus(this, title_bar);
@@ -119,7 +119,7 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
 
     @Override
     public void initContentView() {
-        setContentView(R.layout.activity_reset_pwd);
+        setContentView(R.layout.activity_find_pass);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
 
     }
 
-    @OnClick({R.id.tv_get_sms, R.id.btn_reset,R.id.img_title_left})
+    @OnClick({R.id.tv_get_sms, R.id.btn_find,R.id.img_title_left})
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
@@ -136,7 +136,7 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
                 presenter.verify(mobile);
                 presenter.getSms(this, mobile);
                 break;
-            case R.id.btn_reset:
+            case R.id.btn_find:
                 mobile = edt_mobile.getText().toString();
                 sms = edt_sms.getText().toString();
                 pwd = edt_pwd.getText().toString();
@@ -191,9 +191,9 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onGetSmsSuccess() {
-        new ResetPwdActivity.TimeCount(61000, 1000).start();
+        new FindPassActivity.TimeCount(61000, 1000).start();
         tv_get_sms.setEnabled(false);
-        tv_get_sms.setBackground(getDrawable(R.drawable.textview_blue_bg_shape));
+        tv_get_sms.setBackground(getDrawable(R.drawable.blue_bg_shape));
         tv_get_sms.setTextColor(getResources().getColor(R.color.white));
     }
 
@@ -203,12 +203,12 @@ public class ResetPwdActivity extends BaseActivity implements ResetPwdViewImpl {
     }
 
     @Override
-    public void onResetSuccess() {
+    public void onFindPassSuccess() {
 
     }
 
     @Override
-    public void onResetFaild(String msg) {
+    public void onFindPassFaild(String msg) {
 
     }
 

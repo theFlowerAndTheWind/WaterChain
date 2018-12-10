@@ -18,7 +18,7 @@
             style="@style/EdtTopBottomLeft"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
-            android:background="@drawable/edittext_border_bg_shape"
+            android:background="@drawable/gray_border_bg_shape"
             android:hint="@string/hint_input_mobile"
             android:inputType="phone"
             android:maxLength="11" />
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/view_space"
                 android:layout_weight="4"
-                android:background="@drawable/edittext_border_bg_shape"
+                android:background="@drawable/gray_border_bg_shape"
                 android:hint="@string/hint_input_security_code"
                 android:inputType="number"
                 android:maxLength="20"
@@ -49,12 +49,11 @@
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:background="@drawable/textview_border_bg_shape"
+                android:background="@drawable/blue_border_bg_shape"
                 android:gravity="center"
                 android:text="发送验证码"
-
                 android:textColor="@color/primary_blue"
-                android:textSize="@dimen/nomal_text_size" />
+                android:textSize="@dimen/middle_btn_text_size" />
         </LinearLayout>
 
 
@@ -64,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
             android:layout_below="@+id/linear_sms"
-            android:background="@drawable/edittext_border_bg_shape"
+            android:background="@drawable/gray_border_bg_shape"
             android:hint="@string/hint_input_pwd"
             android:maxLength="20"
             android:maxLines="1" />
@@ -75,13 +74,13 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
             android:layout_below="@+id/edt_pwd"
-            android:background="@drawable/edittext_border_bg_shape"
+            android:background="@drawable/gray_border_bg_shape"
             android:hint="@string/hint_confirm_pwd"
             android:maxLength="20"
             android:maxLines="1" />
 
         <Button
-            android:id="@+id/btn_reset"
+            android:id="@+id/btn_find"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edt_confirm"

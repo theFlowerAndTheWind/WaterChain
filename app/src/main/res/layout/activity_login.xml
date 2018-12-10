@@ -19,7 +19,7 @@
             android:layout_height="@dimen/edittext_height"
             android:inputType="phone"
             android:maxLength="11"
-            android:background="@drawable/edittext_border_bg_shape" />
+            android:background="@drawable/gray_border_bg_shape" />
 
         <EditText
             android:id="@+id/edt_pwd"
@@ -29,7 +29,7 @@
             android:layout_below="@+id/edt_mobile"
             android:maxLines="1"
             android:maxLength="20"
-            android:background="@drawable/edittext_border_bg_shape" />
+            android:background="@drawable/gray_border_bg_shape" />
 
         <Button
             android:id="@+id/btn_login"

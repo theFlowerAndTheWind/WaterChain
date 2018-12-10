@@ -45,9 +45,9 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl {
     @BindView(R.id.btn_login)
     Button btn_login;
 
-    @BindDrawable(R.drawable.edittext_border_bg_shape)
+    @BindDrawable(R.drawable.gray_border_bg_shape)
     Drawable edt_border;
-    @BindDrawable(R.drawable.edittext_border_illegal_bg_shape)
+    @BindDrawable(R.drawable.red_border_illegal_bg_shape)
     Drawable edt_border_illegal;
 
     @BindString(R.string.key_edt_name_mobile)
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements LoginViewImpl {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
             case R.id.tv_reset:
-                startActivity(new Intent(LoginActivity.this, ResetPwdActivity.class));
+                startActivity(new Intent(LoginActivity.this, FindPassActivity.class));
                 break;
             case R.id.img_title_left:
                 goBack(view);

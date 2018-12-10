@@ -132,6 +132,7 @@ public class RegisterModel {
             return;
         }
         Log.e("TAG", "开始注册请求");
+        callback.onRegisterSuccess();
 
 //        Map<String, Object> form = new HashMap<>();
 //        form.put(context.getString(R.string.field_mobile), mobile);

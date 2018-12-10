@@ -1,6 +1,6 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
- * FileName: ResetPwdPresenter
+ * FileName: FindPassPresenter
  * Author: sxt
  * Date: 2018/12/9 2:17 AM
  * Description:
@@ -12,22 +12,22 @@ package com.quanminjieshui.waterchain.contract.presenter;
 
 import com.quanminjieshui.waterchain.base.BaseActivity;
 import com.quanminjieshui.waterchain.contract.BasePresenter;
-import com.quanminjieshui.waterchain.contract.model.ResetPwdModel;
-import com.quanminjieshui.waterchain.contract.view.ResetPwdViewImpl;
+import com.quanminjieshui.waterchain.contract.model.FindPassModel;
+import com.quanminjieshui.waterchain.contract.view.FindPassViewImpl;
 
 import java.util.Map;
 
 /**
- * @ClassName: ResetPwdPresenter
+ * @ClassName: FindPassPresenter
  * @Description: java类作用描述
  * @Author: sxt
  * @Date: 2018/12/9 2:17 AM
  */
-public class ResetPwdPresenter extends BasePresenter<ResetPwdViewImpl>  {
+public class FindPassPresenter extends BasePresenter<FindPassViewImpl>  {
 
-    private ResetPwdModel model;
+    private FindPassModel model;
 
-    public ResetPwdPresenter(ResetPwdModel model) {
+    public FindPassPresenter(FindPassModel model) {
         this.model = model;
     }
 
@@ -41,11 +41,11 @@ public class ResetPwdPresenter extends BasePresenter<ResetPwdViewImpl>  {
 
     public void getSms(BaseActivity activity, String mobile) {
         if (model == null) {
-            model = new ResetPwdModel();
+            model = new FindPassModel();
         }
 
 
-        model.getSms(activity, mobile, new ResetPwdModel.ResetPwdCallback() {
+        model.getSms(activity, mobile, new FindPassModel.FindPassCallback() {
 
 
             @Override
@@ -77,11 +77,11 @@ public class ResetPwdPresenter extends BasePresenter<ResetPwdViewImpl>  {
             }
 
             @Override
-            public void onResetSuccess() {
+            public void onFindPassSuccess() {
             }
 
             @Override
-            public void onResetFaild(String msg) {
+            public void onFindPassFaild(String msg) {
             }
 
         });
@@ -89,9 +89,9 @@ public class ResetPwdPresenter extends BasePresenter<ResetPwdViewImpl>  {
 
     public void reset(BaseActivity activity, final String mobile, final String pwd, final String confirm, final String sms) {
         if (model == null) {
-            model = new ResetPwdModel();
+            model = new FindPassModel();
         }
-        model.reset(activity, mobile, pwd, confirm, sms, new ResetPwdModel.ResetPwdCallback() {
+        model.findPass(activity, mobile, pwd, confirm, sms, new FindPassModel.FindPassCallback() {
             @Override
             public void onEdtContentsLegal() {
                 if (mView != null) {
@@ -115,16 +115,16 @@ public class ResetPwdPresenter extends BasePresenter<ResetPwdViewImpl>  {
             }
 
             @Override
-            public void onResetSuccess() {
+            public void onFindPassSuccess() {
                 if (mView != null) {
-                    mView.onResetSuccess();
+                    mView.onFindPassSuccess();
                 }
             }
 
             @Override
-            public void onResetFaild(String msg) {
+            public void onFindPassFaild(String msg) {
                 if (mView != null) {
-                    mView.onResetFaild(msg);
+                    mView.onFindPassFaild(msg);
                 }
             }
         });
